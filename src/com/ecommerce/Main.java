@@ -39,7 +39,9 @@ public class Main {
         System.out.print("Seleccione opción: ");
     }
 
+    // ✅ Método actualizado con try-catch-finally
     private static void agregarCliente() {
+        System.out.println("\n=== Alta de Cliente ===");
         try {
             System.out.print("Nombre del cliente: ");
             String nombre = sc.nextLine();
@@ -50,9 +52,16 @@ public class Main {
 
             Cliente cliente = new Cliente(clienteId++, nombre, email, direccion);
             sistema.agregarCliente(cliente);
-            System.out.println("Cliente agregado correctamente.");
+            System.out.println("✔ Cliente agregado correctamente.\n");
+        } catch (NumberFormatException e) {
+            System.out.println("❌ Error: Debe ingresar un número válido");
+        } catch (IllegalArgumentException e) {
+            System.out.println("❌ Datos inválidos: " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Error al agregar cliente: " + e.getMessage());
+            System.out.println("❌ Ocurrió un error al agregar el cliente: " + e.getMessage());
+        } finally {
+            System.out.println("[FIN] Operación de alta de cliente finalizada.");
+            System.out.println("---------------------------------------------\n");
         }
     }
 
